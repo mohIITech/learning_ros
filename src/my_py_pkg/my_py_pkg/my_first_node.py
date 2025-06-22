@@ -5,11 +5,13 @@ from rclpy.node import Node
 class MyNode(Node):
     def __init__(self):
         super().__init__('py_test')  ## Initialize the node with a name
+        self.counter_ = 0  ## Initialize a counter variable
         self.get_logger().info("Hello, once again, ROS 2 from Python!")  ## Log a message
         self.create_timer(1.0, self.timer_callback)
         
     def timer_callback(self):
-        self.get_logger().info('Hello, from timer_callback!')
+        self.get_logger().info('Hello, from timer_callback! '+str(self.counter_))
+        self.counter_ += 1
 
 def main(args=None):
     rclpy.init(args=args) ## Initialize the ROS 2 Python client library
